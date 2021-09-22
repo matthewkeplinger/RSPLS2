@@ -22,6 +22,8 @@ namespace RSPLS2
 
         public void DisplayRules()
         {
+            Console.WriteLine("RULES:");
+            Console.WriteLine("__________________________________________________________________________________");
             Console.WriteLine("The game is a best of 3 format played either against another human, or a computer");
             Console.WriteLine("Each player will choose a gesture");
             Console.WriteLine("Paper disproves Spock and covers Rock");
