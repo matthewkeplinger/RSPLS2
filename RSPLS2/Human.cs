@@ -14,7 +14,7 @@ namespace RSPLS2
             this.score = score;
             this.choice = choice;
         }
-        public override string PlayerGesture()
+        public override string ChoosePlayerGesture()
         {
             Console.WriteLine("Choose your move (Enter the number next to the move):\n1-Rock\n2-Paper\n3-Scissors\n4-Lizard\n5-Spock");
             int choice = Convert.ToInt32(Console.ReadLine());

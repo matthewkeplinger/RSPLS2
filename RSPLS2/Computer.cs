@@ -12,9 +12,6 @@ namespace RSPLS2
         {
             this.name = "Computer";
         }
-        public override void PlayersChoice()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

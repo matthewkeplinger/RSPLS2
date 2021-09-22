@@ -21,7 +21,7 @@ namespace RSPLS2
            this.gestureChoices = new List<string> { "Rock", "Paper", "Scissors", "Lizard", "Spock" };
         }
 
-        public virtual string PlayerGesture()
+        public virtual string ChoosePlayerGesture()
         {
             Random random = new Random();
             int randomInt = random.Next(5);
