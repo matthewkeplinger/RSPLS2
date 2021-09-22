@@ -11,23 +11,23 @@ namespace RSPLS2
         //player attributes
         public string name;
         public int score;
-        public int choice;
-
-        //Create a list of Gesture Choices for player to select
-        public List<string> GestureChoices = new List<string>();
+        public string choice;
+        public List<string> gestureChoices;
 
         //Constructor to add choices for gesture
         public Player()
         {
-            GestureChoices.Add("Rock");
-            GestureChoices.Add("Paper");
-            GestureChoices.Add("Scissors");
-            GestureChoices.Add("Lizard");
-            GestureChoices.Add("Spock");
+           //Create a list of Gesture Choices for player to select
+           this.gestureChoices = new List<string> { "Rock", "Paper", "Scissors", "Lizard", "Spock" };
         }
 
-        //Usable by players, do not need to define here
-        public abstract void PlayersChoice();
+        public virtual string PlayerGesture()
+        {
+            Random random = new Random();
+            int randomInt = random.Next(5);
+            return this.gestureChoices[randomInt];
+        }
+
 
     }
 }

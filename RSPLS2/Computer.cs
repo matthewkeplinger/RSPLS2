@@ -8,6 +8,10 @@ namespace RSPLS2
 {
     class Computer : Player
     {
+        public Computer()
+        {
+            this.name = "Computer";
+        }
         public override void PlayersChoice()
         {
             throw new NotImplementedException();

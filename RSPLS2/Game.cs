@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace RSPLS2
 {
-    public class Game
+    class Game
     {
-        public Player PlayerOne;
-        public Player PlayerTwo;
-        public int PlayerOneScore = 0;
-        public int PlayerTwoScore = 0;
-        public int WinningScore = 3;
+        Player playerOne;
+        Player playerTwo;
+        public Game()
+        {
+            this.playerOne = SetUpPlayerOne;
+            this.playerTwo = GameType();
+        }
 
         public void RunGame()
         {
@@ -49,17 +51,26 @@ namespace RSPLS2
 
             if (gameType == 1)
             {
-                PlayerOne = new Human();
-                PlayerTwo = new Human();
+                playerTwo = new Human("Player Two");
                 Console.WriteLine("A Duel!");
             }
             else if (gameType == 2)
-            {
-                PlayerOne = new Human();
-                PlayerTwo = new Computer();
+            { 
+                playerTwo = new Computer();
                 Console.WriteLine("Don't let the machines win!");
             }
 
+        }
+
+        public void RoundWinner()
+        {
+            if (PlayerOne.choice == PlayerTwo.choice)
+            {
+                Console.WriteLine("Tie Game: No Points Awarded");
+            }
+            else if (PlayerOne.choice == 1 && (PlayerTwo.choice == 3 || PlayerTwo.choice == 4)){
+                Console.WriteLine("Player One Wins!");
+            }
         }
 
     }
