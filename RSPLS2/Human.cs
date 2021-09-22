@@ -8,9 +8,10 @@ namespace RSPLS2
 {
     class Human : Player
     {
-        public override void playersChoice()
+        public override void PlayersChoice()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Choose a number for the corresponding gesture:\n1-Rock\n2-Paper\n3-Scissors\n4-Lizard\n5-Spock");
+
         }
     }
 }

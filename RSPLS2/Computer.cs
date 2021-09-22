@@ -8,7 +8,7 @@ namespace RSPLS2
 {
     class Computer : Player
     {
-        public override void playersChoice()
+        public override void PlayersChoice()
         {
             throw new NotImplementedException();
         }

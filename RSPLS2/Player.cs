@@ -11,7 +11,7 @@ namespace RSPLS2
         //player attributes
         public string name;
         public int score;
-        public string choice;
+        public int choice;
 
         //Create a list of Gesture Choices for player to select
         public List<string> GestureChoices = new List<string>();
@@ -27,7 +27,7 @@ namespace RSPLS2
         }
 
         //Usable by players, do not need to define here
-        public abstract void playersChoice();
+        public abstract void PlayersChoice();
 
     }
 }
