@@ -25,16 +25,14 @@ namespace RSPLS2
         //Generic 90's DOS intro
         public static void GameIntro()
         {
-            Console.WriteLine("\n\n\nWelcome to Rock, Paper, Scissors, Lizard, Spock");
+            Console.WriteLine("\nWelcome to Rock, Paper, Scissors, Lizard, Spock");
             Console.WriteLine("***********************************************\n");
         }
         //Display Rules for Players
         public static void DisplayRules()
         {
-            Console.WriteLine("\n\nRULES:");
-            Console.WriteLine("__________________________________________________________________________________");
-            Console.WriteLine("The game is a first to 3 format played either against another human, or a computer");
-            Console.WriteLine("Each player will choose a gesture");
+            Console.WriteLine("\n                   RULES:");
+            Console.WriteLine("_________________________________________");
             Console.WriteLine("Paper disproves Spock and covers Rock");
             Console.WriteLine("Rock crushes Scissors and Lizard");
             Console.WriteLine("Scissors cut Paper and decapitate Lizard");
@@ -45,7 +43,7 @@ namespace RSPLS2
         public static Player CreatePlayer()
         {
             Player playerOne;
-            Console.WriteLine("Player 1, Enter your name: ");
+            Console.WriteLine("Player 1, Enter your name: \n");
             string name = Console.ReadLine();
             playerOne = new Human(name, 0, "none");
             return playerOne;
@@ -56,7 +54,7 @@ namespace RSPLS2
         public Player CreateOpponent()
         {
             int gameType;
-            Console.WriteLine("Choose your adversary:\n1-Human (Two Player game)\n2-Computer");
+            Console.WriteLine("\nChoose your adversary:\n1-Human (Two Player game)\n2-Computer\nYour Selection: ");
             gameType = int.Parse(Console.ReadLine());
 
             if (gameType == 1)
@@ -64,12 +62,12 @@ namespace RSPLS2
                 Console.WriteLine("Player Two, enter your name: ");
                 string name = Console.ReadLine();
                 playerTwo = new Human(name, 0, "none");
-                Console.WriteLine("A Duel!");
+                Console.WriteLine("\nOpponents Confirmed: {0} vs. {1}", playerOne.name, playerTwo.name);
             }
             else if (gameType == 2)
             { 
                 playerTwo = new Computer();
-                Console.WriteLine("Don't let the machines win!");
+                Console.WriteLine("\nOpponents Confirmed: {0} vs. {1}", playerOne.name, playerTwo.name);
             }
             else
             {
@@ -78,14 +76,15 @@ namespace RSPLS2
             return playerTwo;
 
         }
-
+        //Each player chooses their gesture, outputs to console and determines who won the round through DetermineRoundWinner;
+        //Conditional to call overall winner if either player has two points (logical winner in best of 3)
         public void CreateRound()
         {
             while(playerOne.score < 2 && playerTwo.score < 2)
             {
                 playerOne.choice = this.playerOne.ChoosePlayerGesture();
                 playerTwo.choice = this.playerTwo.ChoosePlayerGesture();
-                Console.WriteLine("{0} chose {1}", playerOne.name, playerOne.choice);
+                Console.WriteLine("\n{0} chose {1}", playerOne.name, playerOne.choice);
                 Console.WriteLine("{0} chose {1}", playerTwo.name, playerTwo.choice);
                 DetermineRoundWinner(playerOne.choice, playerTwo.choice);
             }
@@ -95,55 +94,61 @@ namespace RSPLS2
             }
     
         }
+
         //Determine the round winner based on Player One's move using if/else if, increment winner score
-        public void DetermineRoundWinner(string p1Choice, string p2Choice)
+        public void DetermineRoundWinner(string PlayerOneChoice, string PlayerTwoChoice)
         {
-            if (p1Choice == p2Choice)
+            if (PlayerOneChoice == PlayerTwoChoice)
             {
                 Console.WriteLine("Tie Game: No Points Awarded");
             }
-            else if (p1Choice == "Rock"  && (p2Choice =="Scissors" || p2Choice == "Lizard")){
-                PlayerOneWins();
+            else if (PlayerOneChoice == "Rock"  && (PlayerTwoChoice =="Scissors" || PlayerTwoChoice == "Lizard")){
+                PlayerOneWins(PlayerOneChoice, PlayerTwoChoice);
             }
-            else if (p1Choice == "Paper" && (p2Choice == "Rock" || p2Choice == "Spock"))
+            else if (PlayerOneChoice == "Paper" && (PlayerTwoChoice == "Rock" || PlayerTwoChoice == "Spock"))
             {
-                PlayerOneWins();
+                PlayerOneWins(PlayerOneChoice, PlayerTwoChoice);
             }
-            else if (p1Choice == "Scissors" && (p2Choice == "Paper" || p2Choice == "Lizard")) 
-            { 
-                PlayerOneWins();
-            }
-            else if (p1Choice == "Lizard" && (p2Choice == "Scissors" || p2Choice == "Rock"))
+            else if (PlayerOneChoice == "Scissors" && (PlayerTwoChoice == "Paper" || PlayerTwoChoice == "Lizard")) 
             {
-                PlayerOneWins();
+                PlayerOneWins(PlayerOneChoice, PlayerTwoChoice);
             }
-            else if (p1Choice == "Spock" && (p2Choice == "Paper" || p2Choice == "Lizard"))
+            else if (PlayerOneChoice == "Lizard" && (PlayerTwoChoice == "Scissors" || PlayerTwoChoice == "Rock"))
             {
-                PlayerOneWins();
+                PlayerOneWins(PlayerOneChoice, PlayerTwoChoice);
+            }
+            else if (PlayerOneChoice == "Spock" && (PlayerTwoChoice == "Paper" || PlayerTwoChoice == "Lizard"))
+            {
+                PlayerOneWins(PlayerOneChoice, PlayerTwoChoice);
             }
             else
             {
-                Console.WriteLine("{0} Wins!", playerTwo.name);
-                playerTwo.score ++;
+                PlayerTwoWins(PlayerOneChoice, PlayerTwoChoice);
             }
         }
-        //Helper to clean up if/else by handling Player one victory
-        public void PlayerOneWins()
+
+        //Write Player victories to console, increment appropriate player score
+        public void PlayerOneWins(string PlayerOneChoice, string PlayerTwoChoice )
         {
-            Console.WriteLine("{0} Wins!", playerOne.name);
+            Console.WriteLine("{0} beats {1}, {2} wins this round!", PlayerOneChoice, PlayerTwoChoice, playerOne.name);
             playerOne.score ++;
         }
+        public void PlayerTwoWins(string PlayerOneChoice, string PlayerTwoChoice)
+        {
+            Console.WriteLine("{0} beats {1}, {2} wins this round!", PlayerTwoChoice, PlayerOneChoice, playerTwo.name);
+            playerTwo.score++;
+        }
 
-        //Helper to determine overall winner
+        //Determine overall winner
         public void OverallWinner()
         {
             if (playerOne.score == 2)
             {
-                Console.WriteLine("{0} Wins the Game!!!", playerOne.name);
+                Console.WriteLine("\n{0} WINS THE GAME!!!", playerOne.name);
             }
             else
             {
-                Console.WriteLine("{0} Wins the Game!!!", playerTwo.name);
+                Console.WriteLine("\n{0} WINS THE GAME!!!", playerTwo.name);
             }
         }
     }
