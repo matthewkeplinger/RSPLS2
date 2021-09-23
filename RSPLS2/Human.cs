@@ -16,8 +16,8 @@ namespace RSPLS2
         }
         public override string ChoosePlayerGesture()
         {
-            Console.WriteLine("Choose your move (Enter the number next to the move):\n1-Rock\n2-Paper\n3-Scissors\n4-Lizard\n5-Spock");
-            int choice = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("{0}, Choose your move (Enter the number next to the move):\n1-Rock\n2-Paper\n3-Scissors\n4-Lizard\n5-Spock", this.name);
+            int choice = Convert.ToInt32(Console.ReadLine()) - 1;
             return this.gestureChoices[choice];
         }
     }

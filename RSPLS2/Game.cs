@@ -20,17 +20,18 @@ namespace RSPLS2
         {
             GameIntro();
             DisplayRules();
+            CreateRound();
         }
         //Generic 90's DOS intro
         public static void GameIntro()
         {
-            Console.WriteLine("Welcome to Rock, Paper, Scissors, Lizard, Spock");
-            Console.WriteLine("***********************************************");
+            Console.WriteLine("\n\n\nWelcome to Rock, Paper, Scissors, Lizard, Spock");
+            Console.WriteLine("***********************************************\n");
         }
         //Display Rules for Players
         public static void DisplayRules()
         {
-            Console.WriteLine("RULES:");
+            Console.WriteLine("\n\nRULES:");
             Console.WriteLine("__________________________________________________________________________________");
             Console.WriteLine("The game is a first to 3 format played either against another human, or a computer");
             Console.WriteLine("Each player will choose a gesture");
@@ -38,7 +39,7 @@ namespace RSPLS2
             Console.WriteLine("Rock crushes Scissors and Lizard");
             Console.WriteLine("Scissors cut Paper and decapitate Lizard");
             Console.WriteLine("Lizard poisons Spock and eats Paper");
-            Console.WriteLine("Spock smashes Scissors and vaporizes Rock");
+            Console.WriteLine("Spock smashes Scissors and vaporizes Rock\n");
         }
         //Create a player instance for Player One and set a name
         public static Player CreatePlayer()
@@ -51,7 +52,7 @@ namespace RSPLS2
 
         }
 
-        //Set up decision for 2 player or Human vs. Computer
+        //Set up decision for 2 player or Human vs. Computer, if neither then re-initiate and try again
         public Player CreateOpponent()
         {
             int gameType;
@@ -70,6 +71,10 @@ namespace RSPLS2
                 playerTwo = new Computer();
                 Console.WriteLine("Don't let the machines win!");
             }
+            else
+            {
+                CreateOpponent();
+            }
             return playerTwo;
 
         }
@@ -79,20 +84,16 @@ namespace RSPLS2
             while(playerOne.score < 2 && playerTwo.score < 2)
             {
                 playerOne.choice = this.playerOne.ChoosePlayerGesture();
-                Console.WriteLine("{0} chose {1}", playerOne.name, playerOne.choice);
                 playerTwo.choice = this.playerTwo.ChoosePlayerGesture();
+                Console.WriteLine("{0} chose {1}", playerOne.name, playerOne.choice);
                 Console.WriteLine("{0} chose {1}", playerTwo.name, playerTwo.choice);
                 DetermineRoundWinner(playerOne.choice, playerTwo.choice);
-
             }
-            if(playerOne.score == 2)
+            if(playerOne.score == 2 || playerTwo.score == 2)
             {
-                Console.WriteLine("{0} Wins!", playerOne.name);
+                OverallWinner();
             }
-            else
-            {
-                Console.WriteLine("{0} Wins!", playerTwo.name);
-            }
+    
         }
         //Determine the round winner based on Player One's move using if/else if, increment winner score
         public void DetermineRoundWinner(string p1Choice, string p2Choice)
@@ -126,13 +127,24 @@ namespace RSPLS2
                 playerTwo.score ++;
             }
         }
-
+        //Helper to clean up if/else by handling Player one victory
         public void PlayerOneWins()
         {
             Console.WriteLine("{0} Wins!", playerOne.name);
             playerOne.score ++;
         }
-            
 
+        //Helper to determine overall winner
+        public void OverallWinner()
+        {
+            if (playerOne.score == 2)
+            {
+                Console.WriteLine("{0} Wins the Game!!!", playerOne.name);
+            }
+            else
+            {
+                Console.WriteLine("{0} Wins the Game!!!", playerTwo.name);
+            }
+        }
     }
 }
