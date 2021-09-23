@@ -19,7 +19,6 @@ namespace RSPLS2
             Console.WriteLine("\n{0}, Choose your move (Enter the number next to the move):\n1-Rock\n2-Paper\n3-Scissors\n4-Lizard\n5-Spock\nYour Selection: ", this.name);
             int choice = Convert.ToInt32(Console.ReadLine()) - 1;
             return this.gestureChoices[choice];
-
         }
     }
 }
