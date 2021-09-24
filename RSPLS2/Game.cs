@@ -113,11 +113,11 @@ namespace RSPLS2
             {
                 PlayerOneWins(PlayerOneChoice, PlayerTwoChoice);
             }
-            else if (PlayerOneChoice == "Lizard" && (PlayerTwoChoice == "Scissors" || PlayerTwoChoice == "Rock"))
+            else if (PlayerOneChoice == "Lizard" && (PlayerTwoChoice == "Spock" || PlayerTwoChoice == "Paper"))
             {
                 PlayerOneWins(PlayerOneChoice, PlayerTwoChoice);
             }
-            else if (PlayerOneChoice == "Spock" && (PlayerTwoChoice == "Paper" || PlayerTwoChoice == "Lizard"))
+            else if (PlayerOneChoice == "Spock" && (PlayerTwoChoice == "Scissors" || PlayerTwoChoice == "Rock"))
             {
                 PlayerOneWins(PlayerOneChoice, PlayerTwoChoice);
             }
